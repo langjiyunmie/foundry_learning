@@ -1,8 +1,8 @@
 pragma solidity ^0.8.18;
 
-import { Test, console } from "forge-std/Test.sol";
-import { FundMe } from "../../src/FundMe.sol";
-import { DeployFundMe } from "script/DeployFundMe.s.sol";
+import {Test, console} from "forge-std/Test.sol";
+import {FundMe} from "../../src/FundMe.sol";
+import {DeployFundMe} from "script/DeployFundMe.s.sol";
 
 contract FundMeTest is Test {
     FundMe public fundMe;
@@ -13,7 +13,7 @@ contract FundMeTest is Test {
     modifier funded() {
         //避免代码重复
         vm.prank(USER);
-        fundMe.fund{ value: SEND_VALUE }();
+        fundMe.fund{value: SEND_VALUE}();
         _;
     }
 
@@ -46,7 +46,7 @@ contract FundMeTest is Test {
 
     function testFundUpdates() public {
         vm.prank(USER); //下面的交易将会由USER这个用户发送
-        fundMe.fund{ value: SEND_VALUE }();
+        fundMe.fund{value: SEND_VALUE}();
         uint256 amountFunded = fundMe.getAddressToAmountFunded(USER);
         assertEq(amountFunded, SEND_VALUE);
     }
@@ -85,7 +85,7 @@ contract FundMeTest is Test {
         uint160 startingFunderIndex = 1;
         for (uint160 i = startingFunderIndex; i <= numberOfFunders; ++i) {
             hoax(address(i), SEND_VALUE); //hoax 融合了 prank方法和deal方法
-            fundMe.fund{ value: SEND_VALUE }();
+            fundMe.fund{value: SEND_VALUE}();
         }
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
@@ -93,6 +93,6 @@ contract FundMeTest is Test {
         vm.startPrank(fundMe.getOwner());
         fundMe.withdraw();
         vm.stopPrank();
-        assertEq(address(fundMe).balance,0);
+        assertEq(address(fundMe).balance, 0);
     }
 }

@@ -1,6 +1,6 @@
-
 pragma solidity ^0.8.18;
 // Note: The AggregatorV3Interface might be at a different location than what was in the video!
+
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import {PriceConverter} from "./PriceConverter.sol";
 
@@ -27,8 +27,8 @@ contract FundMe {
         require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         addressToAmountFunded[msg.sender] += msg.value;
-        
-        if(!funder[msg.sender]){
+
+        if (!funder[msg.sender]) {
             funders.push(msg.sender);
             funder[msg.sender] = true;
         }
@@ -80,15 +80,16 @@ contract FundMe {
     receive() external payable {
         fund();
     }
-    function getAddressToAmountFunded(address fundingAddress) external view returns(uint256){
+
+    function getAddressToAmountFunded(address fundingAddress) external view returns (uint256) {
         return addressToAmountFunded[fundingAddress];
     }
 
-    function getFunder(uint256 index) external view returns(address){
+    function getFunder(uint256 index) external view returns (address) {
         return funders[index];
     }
 
-    function getOwner() external view returns(address){
+    function getOwner() external view returns (address) {
         return i_owner;
     }
 }

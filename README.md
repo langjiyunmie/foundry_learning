@@ -62,5 +62,4 @@ $ cast <subcommand>
 ```shell
 $ forge --help
 $ anvil --help
-$ cast --help
-```
+$ cast --dddddheld

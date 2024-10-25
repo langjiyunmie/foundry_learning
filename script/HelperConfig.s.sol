@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-import { Script, console } from "forge-std/Script.sol";
+import {Script, console} from "forge-std/Script.sol";
 import "test/mocks/MockV3Aggregator.sol";
 
 contract HelperConfig is Script {
@@ -23,7 +23,7 @@ contract HelperConfig is Script {
     }
 
     function getSepoliaEthConfig() public pure returns (NetworkConfig memory) {
-        NetworkConfig memory sepoliaConfig = NetworkConfig({ priceFeed: 0x61Ec26aA57019C486B10502285c5A3D4A4750AD7 });
+        NetworkConfig memory sepoliaConfig = NetworkConfig({priceFeed: 0x61Ec26aA57019C486B10502285c5A3D4A4750AD7});
         return sepoliaConfig;
     }
 
@@ -33,10 +33,7 @@ contract HelperConfig is Script {
         MockV3Aggregator mockpriceFeed = new MockV3Aggregator(DECIMALS, initialAnswer);
         vm.stopBroadcast();
 
-        NetworkConfig memory anvilConfig = NetworkConfig({ priceFeed: address(mockpriceFeed) });
+        NetworkConfig memory anvilConfig = NetworkConfig({priceFeed: address(mockpriceFeed)});
         return anvilConfig;
     }
-
-
-
 }

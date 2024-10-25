@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-import { Script, console } from "forge-std/Script.sol";
-import { DevOpsTools } from "lib/foundry-devops/src/DevOpsTools.sol";
-import { FundMe } from "../../src/FundMe.sol";
+import {Script, console} from "forge-std/Script.sol";
+import {DevOpsTools} from "lib/foundry-devops/src/DevOpsTools.sol";
+import {FundMe} from "../../src/FundMe.sol";
 
 contract FundFundMe is Script {
     uint256 constant SEND_VALUE = 1 ether;
 
     function fundFundMe(address mostRecentDeployed) public {
         vm.startBroadcast();
-        FundMe(payable(mostRecentDeployed)).fund{ value: SEND_VALUE }();
+        FundMe(payable(mostRecentDeployed)).fund{value: SEND_VALUE}();
         console.log("Funded FundMe with %s", SEND_VALUE);
         vm.stopBroadcast();
     }
